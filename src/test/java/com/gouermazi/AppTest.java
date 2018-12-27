@@ -2,10 +2,11 @@ package com.gouermazi;
 
 import static org.junit.Assert.assertTrue;
 
+import com.gouermazi.craw.Agency;
 import org.junit.Test;
 
 /**
- * Unit test for simple App.
+ * Unit test.
  */
 public class AppTest 
 {
@@ -15,6 +16,6 @@ public class AppTest
     @Test
     public void shouldAnswerWithTrue()
     {
-        assertTrue( true );
+        Agency agency = new Agency("http://en.wikipedia.org/");
     }
 }
