@@ -54,28 +54,6 @@ public class Agency {
         }
     }
 
-   /* public void start() {
-        spyteam.execute(() -> analyze(target));
-    }*/
-
-    public void stop() {
-        ((ThreadPoolExecutor) spyteam).shutdown();
-        ((ThreadPoolExecutor) dirtyWorkTeam).shutdown();
-    }
-
-    public void analyze(String target) {
-        try {
-            doClassify(target);
-        } catch (IOException e) {
-            LOGGER.error("analyze link error ", e);
-        }
-    }
-
-    private void doClassify(String target) throws IOException {
-
-    }
-
-
     /**
      * thread factory
      */
