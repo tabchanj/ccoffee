@@ -62,7 +62,7 @@ public class ImageTargetHandler extends AbstractTargetHandler {
             LOGGER.info("====================================");
             LOGGER.info("====total pics count = " + dirtyWorks.size() + "=====");
             LOGGER.info("====================================");
-            ((ThreadPoolExecutor)dirtyWorkTeam).invokeAll(dirtyWorks, 5, TimeUnit.SECONDS);
+            ((ThreadPoolExecutor)dirtyWorkTeam).invokeAll(dirtyWorks, 15, TimeUnit.SECONDS);
         } catch (Exception e) {
             LOGGER.error("resolve link error", e);
         }
