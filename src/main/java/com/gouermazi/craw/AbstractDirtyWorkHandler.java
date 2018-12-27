@@ -3,7 +3,7 @@ package com.gouermazi.craw;
 import java.util.concurrent.Callable;
 
 /**
- * @author jie·chen 2018-12-27
+ * @author jie·chen
  */
 public abstract class AbstractDirtyWorkHandler implements Callable<Void> {
 

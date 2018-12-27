@@ -18,7 +18,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author jie·chen 2018-12-27
+ * @author jie·chen
  */
 public class ImageTargetHandler extends AbstractTargetHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(ImageTargetHandler.class);

@@ -12,7 +12,7 @@ import java.net.URLConnection;
 import java.util.UUID;
 
 /**
- * @author jie·chen 2018-12-27
+ * @author jie·chen
  */
 public class ImageDirtyWorkHandler extends AbstractDirtyWorkHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(ImageDirtyWorkHandler.class);

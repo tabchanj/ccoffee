@@ -1,7 +1,7 @@
 package com.gouermazi.craw;
 
 /**
- * @author jie·chen 2018-12-27
+ * @author jie·chen
  */
 abstract class AbstractTargetHandler implements Runnable {
     @Override
