@@ -20,7 +20,7 @@ public class Agency {
     /**
      * deal links
      */
-    private final Executor spyteam;
+    private final Executor spyTeam;
 
     /**
      * let this dirtyWorkTeam deal the  specific link`s content(image/video...)
@@ -33,13 +33,13 @@ public class Agency {
 
 
     public Agency(Executor executor, Executor dirtyWorkTeam,String saveDir) {
-        this.spyteam = executor;
+        this.spyTeam = executor;
         this.dirtyWorkTeam = dirtyWorkTeam;
         this.saveDir = saveDir;
     }
 
     public Agency(String saveDir) {
-        this.spyteam = Executors.newCachedThreadPool(spyFactory);
+        this.spyTeam = Executors.newCachedThreadPool(spyFactory);
         this.dirtyWorkTeam = Executors.newCachedThreadPool(spyFactory);
         this.saveDir = saveDir;
     }
@@ -48,7 +48,7 @@ public class Agency {
         if (initUrls != null) {
             for (String url : initUrls) {
                 if (url != null && url.startsWith("http")) {
-                    spyteam.execute(new ImageTargetHandler(url, dirtyWorkTeam, spyteam, new File(saveDir)));
+                    spyTeam.execute(new ImageTargetHandler(url, dirtyWorkTeam, spyTeam, new File(saveDir)));
                 }
             }
         }
