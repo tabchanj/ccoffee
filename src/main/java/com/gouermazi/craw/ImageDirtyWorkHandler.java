@@ -34,6 +34,7 @@ public class ImageDirtyWorkHandler extends AbstractDirtyWorkHandler {
         if (saveDir != null && imageUrl != null && imageUrl.startsWith("http")) {
             URL url;
             try {
+                LOGGER.info("downloading ..." + imageUrl);
                 url = new URL(imageUrl);
                 URLConnection uri = url.openConnection();
                 InputStream is = uri.getInputStream();
@@ -43,7 +44,7 @@ public class ImageDirtyWorkHandler extends AbstractDirtyWorkHandler {
                 OutputStream os = new FileOutputStream(dest);
 
                 byte[] buf = new byte[1024];
-                int len = -1;
+                int len;
 
                 while ((len = is.read(buf)) != -1) {
                     os.write(buf, 0, len);
