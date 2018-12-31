@@ -1,17 +1,16 @@
 package com.gouermazi.craw;
 
+import com.gouermazi.craw.refactoring.Agency;
+import com.gouermazi.craw.refactoring.HuntDog;
+
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * @author jie·chen
  */
 public class Main {
-    public static void main(String[] args) {
-        Agency agency = new Agency("/home/chen/xxx");
-        agency.execute(new ArrayList(){{
-            add("https://www.youtube.com/");
-        }});
-
+    public static void main(String[] args) throws IOException {
+        Agency agency = new HuntDog("/home/chen/xxx");
+        agency.takeDown("");
     }
 }
