@@ -18,14 +18,7 @@ public class ImageDigester implements Digester {
 
     @Override
     public void digest() {
-        try {
-            TrafficLights.PRODUCE_CONTROL.acquire();
-            downloader.download(url, saveDir);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }finally {
-            TrafficLights.PRODUCE_CONTROL.release();
-        }
+        downloader.download(url, saveDir);
     }
 
     @Override

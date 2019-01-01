@@ -22,14 +22,7 @@ public class VideoDigester implements Digester {
 
     @Override
     public void digest() {
-        try {
-            TrafficLights.PRODUCE_CONTROL.acquire();
-            downloader.download(url, saveDir);
-        } catch (InterruptedException e) {
-            LOGGER.error("", e);
-        }finally {
-            TrafficLights.PRODUCE_CONTROL.release();
-        }
+        downloader.download(url, saveDir);
     }
 
     @Override

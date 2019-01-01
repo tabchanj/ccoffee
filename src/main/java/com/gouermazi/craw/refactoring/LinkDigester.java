@@ -21,8 +21,11 @@ import java.util.stream.Collector;
  */
 public class LinkDigester extends AbstractLinkDigester {
     private static final Logger LOGGER = LoggerFactory.getLogger(LinkDigester.class);
-    private final Executor picExecutor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
-    private final Executor fatFileExecutor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);;
+    private final Executor picExecutor = Executors.newFixedThreadPool(
+            Runtime.getRuntime().availableProcessors() * 2,
+            new TeamMemberFactory("picTeam"));
+    private final Executor fatFileExecutor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2,
+            new TeamMemberFactory("fatFileTeam"));
     private final Executor linkTeam;
     private final String seed;
     private final String saveDir;
@@ -82,7 +85,7 @@ public class LinkDigester extends AbstractLinkDigester {
                         else {
                             imgSrc = protco + "://" + host + imgSrc;
                         }
-                        LOGGER.info("pic link =  " + imgSrc);
+//                        LOGGER.info("pic link =  " + imgSrc);
                     }
                     list.add(imgSrc);
                 },
@@ -111,7 +114,7 @@ public class LinkDigester extends AbstractLinkDigester {
                         } else {
                             href = protco + "://" + host + href;
                         }
-                        LOGGER.info("href link =  " + href);
+//                        LOGGER.info("href link =  " + href);
                     }
                     list.add(href);
                 },
@@ -141,7 +144,7 @@ public class LinkDigester extends AbstractLinkDigester {
                         } else {
                             vSrc = protco + "://" + host + vSrc;
                         }
-                        LOGGER.info("video link =  " + vSrc);
+//                        LOGGER.info("video link =  " + vSrc);
                     }
                     list.add(vSrc);
                 },

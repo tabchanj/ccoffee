@@ -38,8 +38,11 @@ public abstract class AbstractFileDownloader implements Downloader {
                         long length = response.getEntity().getContentLength();
                         int ext = url.lastIndexOf(".");
                         String extStr = url.substring(ext);
-                        if (fileBytesLimitLeft() <= 0 ? true : length >= fileBytesLimitLeft()
-                                && fileBytesLimitRight() <= 0 ? true : length <= fileBytesLimitRight()) {
+                        int left = fileBytesLimitLeft();
+                        int right = fileBytesLimitRight();
+                        if ((left <= 0 ? true : length >= left)
+                                && (right <= 0 ? true : length <= right)) {
+                            LOGGER.info(left + "< "+ length +" <" +right);
                             LOGGER.info("file size = " + length);
                             LOGGER.info("downloading ..." + url);
                             File dest = new File(saveDir.getPath() + "/" + UUID.randomUUID().toString() + extStr);

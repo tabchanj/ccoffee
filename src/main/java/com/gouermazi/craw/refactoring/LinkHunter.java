@@ -11,7 +11,9 @@ import java.util.concurrent.Executors;
  */
 public class LinkHunter implements Agency {
     private static final Logger LOGGER = LoggerFactory.getLogger(LinkDigester.class);
-    private final Executor linkTeam = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
+    private final Executor linkTeam = Executors.newFixedThreadPool(
+            Runtime.getRuntime().availableProcessors() * 2,
+            new TeamMemberFactory("linkTeam"));
     private final String saveDir;
 
     public LinkHunter(String saveDir) {
