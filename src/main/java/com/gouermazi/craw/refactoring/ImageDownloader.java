@@ -9,7 +9,7 @@ public class ImageDownloader extends AbstractFileDownloader {
 
     @Override
     public void download(String url, File saveDir) {
-        super.download(url, saveDir);
+        super.download(url, saveDir );
     }
     @Override
     public int fileBytesLimitLeft() {

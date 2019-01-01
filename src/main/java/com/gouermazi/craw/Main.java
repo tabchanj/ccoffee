@@ -1,7 +1,7 @@
 package com.gouermazi.craw;
 
 import com.gouermazi.craw.refactoring.Agency;
-import com.gouermazi.craw.refactoring.HuntDog;
+import com.gouermazi.craw.refactoring.LinkHunter;
 
 import java.io.IOException;
 

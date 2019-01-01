@@ -19,61 +19,50 @@ import java.util.stream.Collector;
 /**
  * @author chen·jie
  */
-public class HuntDog extends AbstractAgency {
-    private static final Logger LOGGER = LoggerFactory.getLogger(HuntDog.class);
-    private final Executor linkExecutor = Executors.newCachedThreadPool();
-    private final Executor picExecutor = Executors.newCachedThreadPool();
-    private final Executor fatFileExecutor = Executors.newCachedThreadPool();
+public class LinkDigester extends AbstractLinkDigester {
+    private static final Logger LOGGER = LoggerFactory.getLogger(LinkDigester.class);
+    private final Executor picExecutor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
+    private final Executor fatFileExecutor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);;
+    private final Executor linkTeam;
+    private final String seed;
     private final String saveDir;
 
-    public HuntDog(String saveDir) {
+    public LinkDigester(Executor linkTeam, String seed, String saveDir) {
+        this.linkTeam = linkTeam;
+        this.seed = seed;
         this.saveDir = saveDir;
     }
 
     @Override
-    public void resolve(Document document) {
-            //解析出来普通href, 图片链接， 视频链接
+    public void run() {
+        digest();
+    }
+
+    @Override
+    public void digest() {
+
+        //解析出来普通href, 图片链接， 视频链接
         try {
+            TrafficLights.acquire();
+            Document document = takeDown(seed);
             List<String> pics =  getPicLink(document);
             List<String> refs =  getHref(document);
             List<String> vs =  getVideoLink(document);
-            pics.stream().forEach(pic -> {
-                try {
-                    TrafficLights.PRODUCE_CONTROL.acquire();
-                    picExecutor.execute(new ImageDigester(pic, new File(saveDir)));
-                } catch (InterruptedException e) {
-                    LOGGER.error("" , e);
-                }finally {
-                    TrafficLights.PRODUCE_CONTROL.release();
-                }
-            });
-            refs.stream().forEach(href -> {
-                try {
-                    TrafficLights.PRODUCE_CONTROL.acquire();
-                    takeDown(href);
-                } catch (InterruptedException e) {
-                    LOGGER.error("" , e);
-                } catch (IOException e) {
-                    LOGGER.error("" , e);
-                } finally {
-                    TrafficLights.PRODUCE_CONTROL.release();
-                }
-            });
-            vs.stream().forEach(src -> {
-                try {
-                    TrafficLights.PRODUCE_CONTROL.acquire();
-                    fatFileExecutor.execute(new VideoDigester(src, new File(saveDir + "/1video")));
-                } catch (InterruptedException e) {
-                    LOGGER.error("" , e);
-                } finally {
-                    TrafficLights.PRODUCE_CONTROL.release();
-                }
-            });
+            pics.stream().forEach(pic -> picExecutor.execute(new ImageDigester(pic, new File(saveDir + "/pic"))));
+            refs.stream().forEach(href -> linkTeam.execute(new LinkDigester(linkTeam, href, saveDir)));
+            vs.stream().forEach(src -> fatFileExecutor.execute(new VideoDigester(src, new File(saveDir + "/video"))));
         } catch (MalformedURLException e) {
             LOGGER.error("" , e);
+        } catch (IOException e) {
+            LOGGER.error("" , e);
+        } catch (InterruptedException e) {
+            LOGGER.error("" , e);
+        } finally {
+            TrafficLights.release();
         }
 
     }
+
     protected List<String> getPicLink(Document document) throws MalformedURLException {
         String url = document.location();
         URL origin = new URL(url);

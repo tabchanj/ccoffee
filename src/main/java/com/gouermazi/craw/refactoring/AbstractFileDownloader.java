@@ -55,7 +55,7 @@ public abstract class AbstractFileDownloader implements Downloader {
                     IOUtils.closeQuietly(httpclient);
                 }
             } catch (Exception e) {
-                LOGGER.error("download failed ...", e);
+                LOGGER.error("download failed ..." + "\n" + url, e);
             }
         }
     }
