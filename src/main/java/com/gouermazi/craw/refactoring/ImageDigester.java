@@ -1,16 +1,11 @@
 package com.gouermazi.craw.refactoring;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.File;
 
 /**
  * @author chen·jie
  */
 public class ImageDigester implements Digester {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ImageDigester.class);
-
     private final String url;
     private final File saveDir;
     private final Downloader downloader;
