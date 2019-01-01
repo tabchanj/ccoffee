@@ -40,7 +40,7 @@ public abstract class AbstractFileDownloader implements Downloader {
                         String extStr = url.substring(ext);
                         if (fileBytesLimitLeft() <= 0 ? true : length >= fileBytesLimitLeft()
                                 && fileBytesLimitRight() <= 0 ? true : length <= fileBytesLimitRight()) {
-                            LOGGER.info("file size = " + source.available());
+                            LOGGER.info("file size = " + length);
                             LOGGER.info("downloading ..." + url);
                             File dest = new File(saveDir.getPath() + "/" + UUID.randomUUID().toString() + extStr);
                             if (!dest.exists())
