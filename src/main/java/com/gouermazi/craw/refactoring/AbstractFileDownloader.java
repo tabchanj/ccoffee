@@ -23,7 +23,6 @@ public abstract class AbstractFileDownloader implements Downloader {
     @Override
     public void download(String url, File saveDir) {
         try {
-            LOGGER.info("url = " + url);
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
