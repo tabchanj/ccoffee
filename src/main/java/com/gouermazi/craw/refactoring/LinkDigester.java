@@ -1,5 +1,6 @@
 package com.gouermazi.craw.refactoring;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
@@ -76,6 +77,7 @@ public class LinkDigester extends AbstractLinkDigester {
                 LinkedList::new,
                 (list, ele) -> {
                     String imgSrc = ele.attr("src");
+                    imgSrc = StringUtils.isNotBlank(imgSrc) ? imgSrc : ele.attr("data-src");
                     if (imgSrc != null) {
                         if (imgSrc.startsWith("http")) {
                         } else if (imgSrc.startsWith("//")) {

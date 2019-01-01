@@ -11,17 +11,19 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.InputStream;
-import java.util.UUID;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * @author chen·jie
  */
 public abstract class AbstractFileDownloader implements Downloader {
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractFileDownloader.class);
+    private static final AtomicLong count = new AtomicLong(1);
 
     @Override
     public void download(String url, File saveDir) {
         try {
+            LOGGER.info("url = " + url);
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -45,7 +47,7 @@ public abstract class AbstractFileDownloader implements Downloader {
                             LOGGER.info(left + "< "+ length +" <" +right);
                             LOGGER.info("file size = " + length);
                             LOGGER.info("downloading ..." + url);
-                            File dest = new File(saveDir.getPath() + "/" + UUID.randomUUID().toString() + extStr);
+                            File dest = new File(saveDir.getPath() + "/" + count.getAndIncrement() + extStr);
                             if (!dest.exists())
                                 dest.getParentFile().mkdirs();
                             FileUtils.copyInputStreamToFile(source, dest);
