@@ -1,10 +1,10 @@
 package com.gouermazi.craw.refactoring;
 
+import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitRedirectStrategie;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.client.LaxRedirectStrategy;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public abstract class AbstractLinkDigester implements Digester {
     public Document takeDown(String seed) throws IOException {
         CloseableHttpClient httpclient = HttpClients.custom()
-                .setRedirectStrategy(new LaxRedirectStrategy())
+                .setRedirectStrategy(new HtmlUnitRedirectStrategie())
                 .build();
         HttpGet get = new HttpGet(seed);
         get.addHeader("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36");
