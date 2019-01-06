@@ -44,7 +44,6 @@ public class LinkDigester extends AbstractLinkDigester {
 
     @Override
     public void digest() {
-
         //解析出来普通href, 图片链接， 视频链接
         try {
             TrafficLights.acquire();
