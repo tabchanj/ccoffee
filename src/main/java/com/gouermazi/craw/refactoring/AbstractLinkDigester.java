@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public abstract class AbstractLinkDigester implements Digester {
     public Document takeDown(String seed) throws IOException {
-        AtomicReference<Document> doc = new AtomicReference<>();
+        AtomicReference<Document> doc = new AtomicReference();
         try (
                 CloseableHttpClient httpclient = HttpClients.custom()
                         .setRedirectStrategy(new HtmlUnitRedirectStrategie())
