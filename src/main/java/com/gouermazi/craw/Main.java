@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args) throws IOException {
-        Agency agency = new HuntDog("/home/chen/xxx");
-        agency.takeDown("");
+        Agency agency = new LinkHunter("/home/chen/xxx");
+        agency.takeDown("http://www.hao6v.com/dy/2018-12-03/WuMingZhiBei.html");
     }
 }
