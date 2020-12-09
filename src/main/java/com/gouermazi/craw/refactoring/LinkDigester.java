@@ -24,9 +24,9 @@ public class LinkDigester extends AbstractLinkDigester {
     private static final Logger LOGGER = LoggerFactory.getLogger(LinkDigester.class);
     private final Executor picExecutor = Executors.newFixedThreadPool(
             Runtime.getRuntime().availableProcessors() * 2,
-            new TeamMemberFactory("picTeam"));
+            new TeamMemberFactory("picTeam-fac"));
     private final Executor fatFileExecutor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2,
-            new TeamMemberFactory("fatFileTeam"));
+            new TeamMemberFactory("fatFileTeam-fac"));
     private final Executor linkTeam;
     private final String seed;
     private final String saveDir;
@@ -86,7 +86,6 @@ public class LinkDigester extends AbstractLinkDigester {
                         else {
                             imgSrc = protco + "://" + host + imgSrc;
                         }
-//                        LOGGER.info("pic link =  " + imgSrc);
                     }
                     list.add(imgSrc);
                 },
@@ -115,7 +114,6 @@ public class LinkDigester extends AbstractLinkDigester {
                         } else {
                             href = protco + "://" + host + href;
                         }
-//                        LOGGER.info("href link =  " + href);
                     }
                     list.add(href);
                 },
